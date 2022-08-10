@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import styles from './Feedback.module.css';
+import PropTypes from 'prop-types';
 
 import { Statistic } from 'components/statistics/Statistics';
 import { FeedbackOptions } from 'components/feedbackOptions/FeedbackOptions';
@@ -78,3 +79,10 @@ export class Feedback extends Component {
     );
   }
 }
+
+Feedback.propTypes = {
+  step: PropTypes.number.isRequired,
+  difficultGood: PropTypes.number.isRequired,
+  difficultNeutral: PropTypes.number.isRequired,
+  difficultBad: PropTypes.number.isRequired,
+};
