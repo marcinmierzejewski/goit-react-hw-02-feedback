@@ -53,15 +53,19 @@ export class Feedback extends Component {
   render() {
     const { good, neutral, bad } = this.state;
     // const { children } = this.props;
-    const { feedback } = styles;
+    const { feedback, btnWrapper } = styles;
 
     return (
       <div className={feedback}>
+
         <Section title="Please leave feedback">
-          <FeedbackOptions options="Good" onLeaveFeedback={this.updateGood} />
-          <FeedbackOptions options="Neutral" onLeaveFeedback={this.updateNeutral}/>
-          <FeedbackOptions options="Bad" onLeaveFeedback={this.updateBad} />
-          </Section>
+          <div className={btnWrapper}>
+            <FeedbackOptions options="Good" onLeaveFeedback={this.updateGood} />
+            <FeedbackOptions options="Neutral" onLeaveFeedback={this.updateNeutral}/>
+            <FeedbackOptions options="Bad" onLeaveFeedback={this.updateBad} />
+          </div>         
+        </Section>
+
         <Section title="Statistic">
           {good || neutral || bad > 0 ? (
             <Statistic

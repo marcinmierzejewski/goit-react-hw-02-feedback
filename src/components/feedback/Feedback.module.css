@@ -1,3 +1,8 @@
 .feedback {
-  font-size: 20px;
+  max-width: 350px;
+  margin: 0 auto;
+}
+
+.btnWrapper {
+  text-align: center;
 }
