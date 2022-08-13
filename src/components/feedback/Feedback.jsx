@@ -6,6 +6,7 @@ import { Statistic } from 'components/statistics/Statistics';
 import { FeedbackOptions } from 'components/feedbackOptions/FeedbackOptions';
 import { Section } from 'components/section/Section';
 import { Notification } from 'components/notification/Notification';
+import { Reset } from 'components/reset/Reset';
 
 export class Feedback extends Component {
   static defaultProps = {
@@ -50,6 +51,11 @@ export class Feedback extends Component {
     }));
   };
 
+  resetState = () => {
+    console.log('Reset...');
+    this.setState(() => ({ bad: 0, good: 0, neutral: 0 }));
+  };
+
   render() {
     const { good, neutral, bad } = this.state;
     // const { children } = this.props;
@@ -57,24 +63,29 @@ export class Feedback extends Component {
 
     return (
       <div className={feedback}>
-
         <Section title="Please leave feedback">
           <div className={btnWrapper}>
             <FeedbackOptions options="Good" onLeaveFeedback={this.updateGood} />
-            <FeedbackOptions options="Neutral" onLeaveFeedback={this.updateNeutral}/>
+            <FeedbackOptions
+              options="Neutral"
+              onLeaveFeedback={this.updateNeutral}
+            />
             <FeedbackOptions options="Bad" onLeaveFeedback={this.updateBad} />
-          </div>         
+          </div>
         </Section>
 
         <Section title="Statistic">
           {good || neutral || bad > 0 ? (
-            <Statistic
-              good={good}
-              neutral={neutral}
-              bad={bad}
-              total={this.countTotalFeedback()}
-              positivePercentage={this.countPositiveFeedbackPercentage().toFixed()}
-            />
+            <>
+              <Statistic
+                good={good}
+                neutral={neutral}
+                bad={bad}
+                total={this.countTotalFeedback()}
+                positivePercentage={this.countPositiveFeedbackPercentage().toFixed()}
+              />
+              <Reset name="Reset feedback" func={this.resetState} />
+            </>
           ) : (
             <Notification message="There is no feedback"></Notification>
           )}

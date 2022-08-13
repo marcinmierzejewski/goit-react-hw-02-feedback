@@ -8,15 +8,17 @@ export const Statistic = ({
   total,
   positivePercentage,
 }) => {
-  const {statisticValue} = styles
+  const {statisticValue, totalWrapper} = styles
 
   return (
     <div>
       <p className={statisticValue}>Good: {good}</p>
       <p className={statisticValue}>Neutral: {neutral}</p>
       <p className={statisticValue}>Bad: {bad}</p>
-      <p className={statisticValue}>Total: {total}</p>
-      <p className={statisticValue}>Positive feedback: {positivePercentage}%</p>
+      <div className={totalWrapper}>
+        <p>Total: {total}</p>
+        <p>Positive feedback: {positivePercentage}%</p>
+      </div>      
     </div>
   );
 };

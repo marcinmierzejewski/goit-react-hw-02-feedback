@@ -3,3 +3,8 @@
   font-weight: 600;
   letter-spacing: 0.02em;
 }
+
+.totalWrapper{
+  composes: statisticValue;
+  font-size: 20px;
+}
