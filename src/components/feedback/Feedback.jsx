@@ -22,34 +22,34 @@ export class Feedback extends Component {
     bad: this.props.difficultBad,
   };
 
-  countTotalFeedback = () =>
-    this.state.good + this.state.neutral + this.state.bad;
+  countTotalFeedback = () => {
+    const { good, neutral, bad } = this.state;
+    return good + neutral + bad;
+  };
 
   countPositiveFeedbackPercentage = () =>
-    (this.state.good /
-      (this.state.good + this.state.neutral + this.state.bad)) *
-    100;
+    (this.state.good / this.countTotalFeedback()) * 100;
 
-  updateGood = () => {
-    console.log('Good updating...');
-    this.setState((state, props) => ({
-      good: state.good + props.step,
-    }));
+  updateFields = val => {
+    console.log(`${val} updating...`);
+    this.setState({
+      [val]: this.state[val] + this.props.step,
+    });
   };
 
-  updateNeutral = () => {
-    console.log('Neutral updating...');
-    this.setState((state, props) => ({
-      neutral: state.neutral + props.step,
-    }));
-  };
+  // updateNeutral = () => {
+  //   console.log('Neutral updating...');
+  //   this.setState((state, props) => ({
+  //     neutral: state.neutral + props.step,
+  //   }));
+  // };
 
-  updateBad = () => {
-    console.log('Bad updating...');
-    this.setState((state, props) => ({
-      bad: state.bad + props.step,
-    }));
-  };
+  // updateBad = () => {
+  //   console.log('Bad updating...');
+  //   this.setState((state, props) => ({
+  //     bad: state.bad + props.step,
+  //   }));
+  // };
 
   resetState = () => {
     console.log('Reset...');
@@ -58,19 +58,27 @@ export class Feedback extends Component {
 
   render() {
     const { good, neutral, bad } = this.state;
-    // const { children } = this.props;
     const { feedback, btnWrapper } = styles;
 
     return (
       <div className={feedback}>
         <Section title="Please leave feedback">
           <div className={btnWrapper}>
-            <FeedbackOptions options="Good" onLeaveFeedback={this.updateGood} />
+            <FeedbackOptions
+              options="Good"
+              onLeaveFeedback={this.updateFields}
+              field="good"
+            />
             <FeedbackOptions
               options="Neutral"
-              onLeaveFeedback={this.updateNeutral}
+              onLeaveFeedback={this.updateFields}
+              field="neutral"
             />
-            <FeedbackOptions options="Bad" onLeaveFeedback={this.updateBad} />
+            <FeedbackOptions
+              options="Bad"
+              onLeaveFeedback={this.updateFields}
+              field="bad"
+            />
           </div>
         </Section>
 
